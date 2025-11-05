@@ -46,7 +46,7 @@ We provide official SDKs in multiple languages to integrate Whisper's threat int
 | **Python SDK** | [sdk-python](https://github.com/whisper-sec/sdk-python) | Python |
 | **TypeScript SDK** | [sdk-typescript](https://github.com/whisper-sec/sdk-typescript) | TypeScript |
 | **C# SDK** | [sdk-csharp](https://github.com/whisper-sec/sdk-csharp) | C# |
-| **Bash SDK** | [sdk-bash](https://github.com/whisper-sec/sdk-bash) | Shell |
+| **Java SDK** | [sdk-java](https://github.com/whisper-sec/sdk-java) | Shell |
 
 ### STIX Support
 
