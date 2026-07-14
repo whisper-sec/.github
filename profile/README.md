@@ -1,8 +1,11 @@
 <div align="center">
 
-<img src="./whisper-logo.png" width="88" alt="Whisper" />
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/whisper-sec/.github/main/profile/whisper-logo.png">
+  <img alt="Whisper" width="340" src="https://raw.githubusercontent.com/whisper-sec/.github/main/profile/whisper-logo-light.png">
+</picture>
 
-# Whisper
+<br/><br/>
 
 **We index the internet's infrastructure into one live graph, then use that graph two ways:
 to defend your network, and to give every AI agent on it a real, verifiable identity.**
@@ -50,8 +53,8 @@ Free key: [console.whisper.security](https://console.whisper.security/sign-up)
 &middot; a handful of read procedures (`whisper.assess`, `.identify`, `.variants`, `.history`...)
 answer **keyless**, up to a small taste cap, no signup at all.
 
-**Start here:** [whisper-graph-mcp](https://github.com/whisper-sec/whisper-graph-mcp) &middot;
-[docs](https://www.whisper.security/docs/cypher-query-guide)
+**Start here:** [console.whisper.security](https://console.whisper.security/sign-up) &middot;
+[Cypher docs](https://www.whisper.security/docs/cypher-query-guide)
 
 </td>
 <td width="50%" valign="top">
@@ -85,19 +88,28 @@ A custom graph engine built from first principles for internet infrastructure: *
 across **39 entity types** and **39.3B+ relationships**, updated continuously, queried in
 milliseconds, with no fixed traversal depth.
 
-- **DNS** - 12B+ resolution edges, including historical state
-- **BGP & routing** - 116K+ ASNs, 2.5M+ prefixes, streamed continuously, never a daily snapshot
-- **GeoIP** - 54K+ cities across 424 countries
-- **WHOIS** - organization, registrar, and contact records
-- **Threat intelligence** - 43 live feeds, every verdict shipped with its evidence chain
-- **Web** - 10.9B+ hyperlinks between sites
-- **DNSSEC** and time-travel queries over how infrastructure looked at any point in the past
+- **DNS & hostnames** - 12B+ resolution edges, CNAME chains, nameserver and mail delegation, the parent-child hierarchy down to the TLD, including historical state
+- **IP, BGP & routing** - IPv4/IPv6, the prefixes and allocations behind them, 116K+ ASNs, who announces and peers with whom, RPKI ROAs, streamed continuously, never a daily snapshot
+- **The physical internet** - data-center facilities, internet exchanges (IXPs), submarine cables and their landings, CDN points of presence, and cloud regions
+- **The web** - 10.9B+ hyperlinks between sites: the link graph that ties one property to another
+- **WHOIS & ownership** - registrants, registrars, and the contact records that tie unrelated-looking domains back to a shared owner
+- **Geolocation** - 54K+ cities across 424 countries, joined to the network and facility that carry an address
+- **Threat intelligence** - 40+ live feeds and named actors mapped to MITRE ATT&CK, every verdict shipped with its evidence chain
+- **Email authentication** - SPF reach, mail routing, and DMARC reporting
+- **DNSSEC** and time-travel queries over how any of the above looked at any point in the past
 
-```mermaid
-flowchart LR
-    A["DNS · BGP · WHOIS · GeoIP<br/>Threat feeds · Web links · DNSSEC"] --> B(("WhisperGraph"))
-    B --> C["Security teams<br/>Cypher · REST · SIEM/SOAR · MCP"]
-    B --> D["AI agents<br/>CLI · SDKs · DNS · RDAP"]
+```text
+  DNS · IP/BGP/RPKI · the physical internet (cables · datacenters · IXPs · PoPs)
+  the web link graph · WHOIS · GeoIP · threat feeds · email auth · DNSSEC
+                                   │
+                                   ▼
+                            ┌──────────────┐
+                            │ WhisperGraph │
+                            └──────┬───────┘
+                    ┌──────────────┴──────────────┐
+                    ▼                              ▼
+             Security teams                    AI agents
+        Cypher · REST · SIEM/SOAR         CLI · SDKs · DNS · RDAP
 ```
 
 **What makes it different**
@@ -144,8 +156,7 @@ network ourselves, not a stub waiting on a v2.
 
 | Repository | What it is |
 |---|---|
-| [whisper-cli](https://github.com/whisper-sec/whisper-cli) | The official CLI: one static binary, a scriptable Cobra command set, and a full-screen TUI |
-| [whisper-graph-mcp](https://github.com/whisper-sec/whisper-graph-mcp) | Open-source, self-hostable MCP server for WhisperGraph (TypeScript, Apache-2.0) |
+| [whisper-cli](https://github.com/whisper-sec/whisper-cli) | The official CLI: one static binary, a scriptable Cobra command set, a full-screen TUI, and a built-in MCP server (`whisper mcp`) |
 | [whisper-operator](https://github.com/whisper-sec/whisper-operator) | Kubernetes operator: one label gives a pod a real IPv6 identity, zero privileges, fail-open |
 | [whisper-catalog](https://github.com/whisper-sec/whisper-catalog) | The portable query catalog, every graph query as one provenance-backed `catalog.json` |
 | [setup-whisper](https://github.com/whisper-sec/setup-whisper) | GitHub Action: install the CLI, optionally connect an agent, in CI |
@@ -165,6 +176,7 @@ network ourselves, not a stub waiting on a v2.
 | Repository | What it is |
 |---|---|
 | [whisper-adapters](https://github.com/whisper-sec/whisper-adapters) | One command gives Claude Code, Gemini CLI, Antigravity, Codex, or Copilot CLI a Whisper identity |
+| [whisper-pi](https://github.com/whisper-sec/whisper-pi) | Native Pi extension: `pi install npm:whisper-pi` bridges the Whisper tools into the Pi coding agent |
 | [whisper-n8n](https://github.com/whisper-sec/whisper-n8n) | n8n community node: provision and govern agent identities, plus 29 graph recipes, as native operations |
 | [dify-plugin](https://github.com/whisper-sec/dify-plugin) | Dify tool plugin, live on the Dify Marketplace: keyless verify plus the full control plane |
 
@@ -181,9 +193,10 @@ network ourselves, not a stub waiting on a v2.
 
 WhisperGraph reaches your existing stack three ways: a **REST + Cypher API** for direct
 programmatic access, **SIEM/SOAR connectors** for Splunk, Microsoft Sentinel, OpenCTI, and Cortex
-XSOAR, and **MCP**, so any MCP-capable client (Claude, Cursor, VS Code, Windsurf, and any agent
-built on [whisper-adapters](https://github.com/whisper-sec/whisper-adapters)) can query it as a
-tool.
+XSOAR, and **MCP** - the [whisper CLI](https://github.com/whisper-sec/whisper-cli) ships a built-in
+MCP server (`whisper mcp`), so any MCP-capable client (Claude, Cursor, VS Code, Windsurf, and any
+agent built on [whisper-adapters](https://github.com/whisper-sec/whisper-adapters)) can use Whisper
+as a tool.
 
 ## About us
 
@@ -191,9 +204,9 @@ Whisper was founded in January 2025 out of Antler's fall 2024 program, selected 
 0.4% of more than 8,000 startups, by **Kaveh Ranjbar** (Co-Founder & CEO, 25-year
 internet-infrastructure veteran and former RIPE NCC CIO) and **Soroush Rafiee Rad**
 (Co-Founder & CPSO, mathematician with dual PhDs in mathematical logic and the philosophy of
-science). The company raised €1.6M in pre-seed capital from Antler, Atlas SGR, Volve Capital,
-D11z Ventures, and Tioga Trust, and is advised by former ICANN Chairman Maarten
-Botterman and APNIC Chief Scientist Geoff Huston.
+science), and raised €1.6M in pre-seed capital from Antler, Atlas SGR, Volve Capital,
+D11z Ventures, and Tioga Trust. **Meet the whole team on our
+[About Us](https://www.whisper.security/about-us) page.**
 
 We believe that understanding the internet's infrastructure, and being able to prove your place
 on it, is the key to defending it.
