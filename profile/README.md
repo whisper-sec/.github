@@ -175,6 +175,7 @@ network ourselves, not a stub waiting on a v2.
 
 | Repository | What it is |
 |---|---|
+| [whisper-skills](https://github.com/whisper-sec/whisper-skills) | Agent Skills + Claude Code plugin for the WhisperGraph MCP connector: indicator triage, bulk triage, Cypher authoring, brand protection |
 | [whisper-adapters](https://github.com/whisper-sec/whisper-adapters) | One command gives Claude Code, Gemini CLI, Antigravity, Codex, or Copilot CLI a Whisper identity |
 | [whisper-pi](https://github.com/whisper-sec/whisper-pi) | Native Pi extension: `pi install npm:whisper-pi` bridges the Whisper tools into the Pi coding agent |
 | [whisper-n8n](https://github.com/whisper-sec/whisper-n8n) | n8n community node: provision and govern agent identities, plus 29 graph recipes, as native operations |
@@ -196,7 +197,9 @@ programmatic access, **SIEM/SOAR connectors** for Splunk, Microsoft Sentinel, Op
 XSOAR, and **MCP** - the [whisper CLI](https://github.com/whisper-sec/whisper-cli) ships a built-in
 MCP server (`whisper mcp`), so any MCP-capable client (Claude, Cursor, VS Code, Windsurf, and any
 agent built on [whisper-adapters](https://github.com/whisper-sec/whisper-adapters)) can use Whisper
-as a tool.
+as a tool. On top of MCP, [whisper-skills](https://github.com/whisper-sec/whisper-skills) packages
+the investigation playbooks themselves - indicator triage, bulk triage over a SIEM export, Cypher
+authoring, brand protection - as portable Agent Skills and a Claude Code plugin.
 
 ## About us
 
