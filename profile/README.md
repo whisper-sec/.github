@@ -50,8 +50,9 @@ curl -s https://graph.whisper.security/api/query \
 ```
 
 Free key: [console.whisper.security](https://console.whisper.security/sign-up)
-&middot; a handful of read procedures (`whisper.assess`, `.identify`, `.variants`, `.history`...)
-answer **keyless**, up to a small taste cap, no signup at all.
+&middot; the read procedures (`whisper.assess`, `.identify`, `.variants`, `.history`...) answer
+**keyless** with no signup at all. Unauthenticated callers get one query at a time rather than a
+daily quota, so an assistant asking one question after another never meets a rate limit.
 
 **Start here:** [console.whisper.security](https://console.whisper.security/sign-up) &middot;
 [Cypher docs](https://www.whisper.security/docs/cypher-query-guide)
@@ -71,9 +72,16 @@ whisper connect
 dig -x <the /128 it just printed>   # reverse-DNS -> its identity
 ```
 
+Or point an AI assistant at the MCP endpoint and
+install nothing at all:
+
+```text
+https://whisper.online/mcp
+```
+
 Free key: [console.whisper.security](https://console.whisper.security/sign-up)
 &middot; verification (`whisper verify`, RDAP, reverse-DNS) is **keyless** for everyone, always,
-by design.
+by design, and so are the graph tools on that URL.
 
 **Start here:** [whisper-cli](https://github.com/whisper-sec/whisper-cli) &middot;
 [nic.whisper.online](https://nic.whisper.online)
@@ -84,17 +92,21 @@ by design.
 
 ## WhisperGraph
 
-A custom graph engine built from first principles for internet infrastructure: **7.4B+ nodes**
-across **39 entity types** and **39.3B+ relationships**, updated continuously, queried in
-milliseconds, with no fixed traversal depth.
+A custom graph engine built from first principles for internet infrastructure: **7.5B+ nodes**
+across **41 entity types** and **39.7B+ relationships** in **52 kinds**, updated continuously,
+queried in milliseconds, with no fixed traversal depth. Every number on this page is one you can
+check yourself, keyless: `CALL db.labels()` and `CALL db.relationshipTypes()` return the per-type
+census, and [nic.whisper.online/stats/data.json](https://nic.whisper.online/stats/data.json)
+carries the totals. The two are not the same sum, and the gap is the point: the census counts what
+is stored, the totals include what is derived on traversal.
 
-- **DNS & hostnames** - 12B+ resolution edges, CNAME chains, nameserver and mail delegation, the parent-child hierarchy down to the TLD, including historical state
+- **DNS & hostnames** - 3.1B+ resolution edges and 9.1B+ nameserver delegations, counted separately because they are separate questions, plus CNAME chains, mail delegation, the parent-child hierarchy down to the TLD, and historical state
 - **IP, BGP & routing** - IPv4/IPv6, the prefixes and allocations behind them, 116K+ ASNs, who announces and peers with whom, RPKI ROAs, streamed continuously, never a daily snapshot
 - **The physical internet** - data-center facilities, internet exchanges (IXPs), submarine cables and their landings, CDN points of presence, and cloud regions
-- **The web** - 10.9B+ hyperlinks between sites: the link graph that ties one property to another
+- **The web** - phishing-kit URL paths joined to every host they have been served from, plus a sampled hostname-to-hostname link layer. Deliberately not a web-scale link graph, and our own schema docs say so rather than letting you plan a question it cannot answer
 - **WHOIS & ownership** - registrants, registrars, and the contact records that tie unrelated-looking domains back to a shared owner
 - **Geolocation** - 54K+ cities across 424 countries, joined to the network and facility that carry an address
-- **Threat intelligence** - 40+ live feeds and named actors mapped to MITRE ATT&CK, every verdict shipped with its evidence chain
+- **Threat intelligence** - 134 live feed sources and named actors mapped to MITRE ATT&CK, every verdict shipped with its evidence chain
 - **Email authentication** - SPF reach, mail routing, and DMARC reporting
 - **DNSSEC** and time-travel queries over how any of the above looked at any point in the past
 
