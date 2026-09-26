@@ -205,8 +205,8 @@ network ourselves, not a stub waiting on a v2.
 ## Integrate
 
 WhisperGraph reaches your existing stack three ways: a **REST + Cypher API** for direct
-programmatic access, **SIEM/SOAR connectors** for Splunk, Microsoft Sentinel, OpenCTI, and Cortex
-XSOAR, and **MCP** - the [whisper CLI](https://github.com/whisper-sec/whisper-cli) ships a built-in
+programmatic access, **SIEM, threat-intel and automation connectors** for Splunk, Microsoft
+Sentinel, Wazuh, OpenCTI, MISP and n8n, and **MCP** - the [whisper CLI](https://github.com/whisper-sec/whisper-cli) ships a built-in
 MCP server (`whisper mcp`), so any MCP-capable client (Claude, Cursor, VS Code, Windsurf, and any
 agent built on [whisper-adapters](https://github.com/whisper-sec/whisper-adapters)) can use Whisper
 as a tool. On top of MCP, [whisper-skills](https://github.com/whisper-sec/whisper-skills) packages
