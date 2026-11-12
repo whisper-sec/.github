@@ -1,27 +1,31 @@
-# Security Policy
+# Security policy
 
-This is the default security policy for the public repositories of Whisper Security
-(viaGraph B.V.). An individual repository may ship its own `SECURITY.md` with
-project-specific detail; where it does, that file takes precedence for that repository.
+This project is published by Whisper Security (viaGraph B.V.). We take security reports about it seriously and will work with you to fix them.
 
 ## Reporting a vulnerability
 
-Please report security issues responsibly and privately to:
+Please do not open a public issue for a security problem.
 
-**security@whisper.security**
+Report it privately in either of these ways:
 
-Include enough detail to reproduce the issue. We will acknowledge your report, work
-with you on a fix and a disclosure timeline, and credit you if you wish. Please do not
-open a public issue for security-sensitive reports.
+1. Use the "Report a vulnerability" button in the Security tab of this repository. This opens a private advisory that only you and our maintainers can see.
+2. Email security@whisper.security. Encrypt sensitive reports with our OpenPGP key, fingerprint EFF1 663D 9925 3968 2106 A5EA D0F7 0908 CF3B 7929, published at https://www.whisper.security/.well-known/openpgp-key.txt
 
-## Verifying signed releases
+Please include the version or commit you tested, steps to reproduce, and the impact you observed.
 
-Release binaries of the `whisper` CLI are published as signed, checksummed artifacts.
-Each carries a SHA-256 checksum and a detached PGP signature made with the AS219419
-release key (public key at <https://as219419.net/>). The full verification steps live in
-the CLI's own policy: <https://github.com/whisper-sec/whisper-cli/blob/main/SECURITY.md>.
+## What to expect
+
+We acknowledge reports within 3 working days and give you our assessment within 10 working days. We aim to fix critical issues within 30 days and others within 90 days, publish a GitHub security advisory with a CVE where appropriate, and credit you if you wish. Our full policy, including scope and safe harbour for good-faith research, is at https://www.whisper.security/security/disclosure-policy
 
 ## Supported versions
 
-Security fixes target the latest published release of each project. Please upgrade to the
-most recent version before reporting an issue.
+| Version | Supported |
+| :- | :- |
+| The latest release | Yes |
+| Older releases | No, please upgrade |
+
+Security fixes are released for the latest release line only.
+
+## Verifying releases
+
+Where a project publishes signed release artefacts, its own SECURITY.md or RELEASE-VERIFICATION explains how to verify them. For the `whisper` CLI see https://github.com/whisper-sec/whisper-cli/blob/main/SECURITY.md.
